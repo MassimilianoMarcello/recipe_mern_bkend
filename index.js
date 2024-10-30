@@ -26,7 +26,7 @@ const app = express();
 // cors allow the server to accept request from different origin
 app.use(
     cors({
-        origin: 'http://localhost:5173',
+        origin: 'https://recipe-mern-bkend.onrender.com',
         credentials: true
     })
 );
