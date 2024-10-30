@@ -6,7 +6,7 @@ import chalk from 'chalk';
 
 const __filename = fileURLToPath(import.meta.url);
 const PATH = dirname(__filename);
-const filePath = path.join(PATH, '..', 'logs', 'log.txt');
+const filePath = path.join(PATH, '..', 'log', 'log.txt');
 
 const logger = (req, res, next) => {
     const { method, url } = req;
