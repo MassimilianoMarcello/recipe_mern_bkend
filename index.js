@@ -1,3 +1,6 @@
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
@@ -17,6 +20,10 @@ import recipeRoutes from './routes/recipe.js';
 dotenv.config();
 const PORT = process.env.PORT || 5003;
 
+// construct path
+const __filename = fileURLToPath(import.meta.url);
+const PATH = dirname(__filename);
+
 // connect to database
 connectToDB();
 
@@ -26,7 +33,7 @@ const app = express();
 // cors allow the server to accept request from different origin
 app.use(
     cors({
-        origin: 'https://recipe-mern-bkend.onrender.com',
+        origin: 'http://localhost:5173',
         credentials: true
     })
 );
@@ -38,6 +45,9 @@ app.use(cookieParser());
 
 // use middlewares
 app.use(logger);
+
+// serve static files
+app.use(express.static(path.join(PATH, 'dist')));
 
 // use routes
 app.use('/api', userRoutes);
@@ -56,5 +66,5 @@ app.use((err, req, res, next) => {
 
 // listen to port
 app.listen(PORT, () => {
-    console.log(`server is up and running on port :  http://localhost:${PORT}`);
+    console.log(`server is up and running on port :  :${PORT}`);
 });
